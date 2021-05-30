@@ -256,6 +256,9 @@ static const char * const riscv_pred_succ[16] =
 #define OP_MASK_CFUNCT2                0x3
 #define OP_SH_CFUNCT2          5
 
+#define OP_MASK_MAT_SIZE 0x7
+#define OP_SH_MAT_SIZE 12
+
 /* ABI names for selected x-registers.  */
 
 #define X_RA 1
@@ -494,6 +497,7 @@ extern const char * const riscv_gpr_names_numeric[NGPR];
 extern const char * const riscv_gpr_names_abi[NGPR];
 extern const char * const riscv_fpr_names_numeric[NFPR];
 extern const char * const riscv_fpr_names_abi[NFPR];
+extern const char *const riscv_mat_names_numeric[8];
 
 extern const struct riscv_opcode riscv_opcodes[];
 extern const struct riscv_opcode riscv_insn_types[];

@@ -56,6 +56,8 @@ const char * const riscv_fpr_names_abi[NFPR] = {
   "fs8", "fs9", "fs10", "fs11", "ft8", "ft9", "ft10", "ft11"
 };
 
+const char * const riscv_mat_names_numeric[8] ={"mat0", "mat1", "mat2", "mat3", "mat4", "mat5", "mat6", "mat7"};
+
 /* The order of overloaded instructions matters.  Label arguments and
    register arguments look the same. Instructions that can have either
    for arguments must apear in the correct order in this table for the
@@ -200,6 +202,13 @@ const struct riscv_opcode riscv_opcodes[] =
 /* name,     xlen, isa,   operands, match, mask, match_func, pinfo.  */
 {"unimp",       0, INSN_CLASS_C,   "",  0, 0xffffU,  match_opcode, INSN_ALIAS },
 {"unimp",       0, INSN_CLASS_I,   "",  MATCH_CSRRW | (CSR_CYCLE << OP_SH_CSR), 0xffffffffU,  match_opcode, 0 }, /* csrw cycle, x0 */
+
+{"matload",     0, INSN_CLASS_I,    "Mz,Md,o(s)",             0xB,         0xC7F, match_opcode, 0},
+{"matdmul",     0, INSN_CLASS_I, "Mz,Md,Ms1,Ms2",            0x2B,    0xFF8C0C7F, match_opcode, 0},
+{"matmax",      0, INSN_CLASS_I,      "Mz,d,Ms1",       0x200006B,    0xFFFC007F, match_opcode, 0},
+{"matavg",      0, INSN_CLASS_I,      "Mz,d,Ms1",       0x400006B,    0xFFFC007F, match_opcode, 0},
+{"matsum",      0, INSN_CLASS_I,      "Mz,d,Ms1",       0x600006B,    0xFFFC007F, match_opcode, 0},
+
 {"ebreak",      0, INSN_CLASS_C,   "",  MATCH_C_EBREAK, MASK_C_EBREAK, match_opcode, INSN_ALIAS },
 {"ebreak",      0, INSN_CLASS_I,   "",    MATCH_EBREAK, MASK_EBREAK, match_opcode, 0 },
 {"sbreak",      0, INSN_CLASS_C,   "",  MATCH_C_EBREAK, MASK_C_EBREAK, match_opcode, INSN_ALIAS },
